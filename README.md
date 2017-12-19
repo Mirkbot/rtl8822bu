@@ -1,20 +1,27 @@
-<u>**8822BU for Linux**</u>
+# RTL8822BU for Linux supporting Kernel 4.14.5
+
+## About
 
 Driver for 802.11ac USB Adapter with  
 RTL8822BU chipset  
 Only STA/Monitor Mode is supported, no AP.  
 
-A few known wireless cards that use this driver include 
-* [Edimax EW-7822ULC](http://us.edimax.com/edimax/merchandise/merchandise_detail/data/edimax/us/wireless_adapters_ac1200_dual-band/ew-7822ulc/)
-* [ASUS AC-53 NANO](https://www.asus.com/Networking/USB-AC53-Nano/)
+This is my version of the rtl8822bu driver supporting kernel 4.14.5.
+It is based on this driver: https://github.com/jeremyb31/rtl8822bu
 
+Currently only tested on X86_64 - Fedora 27 with Kernel 4.14.5
 
-> NOTE: At least v4.7 is needed to compile this module
-> sorry people with older kernels, the code is removed.
-> Upon request I can work towards making it backwards compatible.
+## Installation
 
-Currently tested on X86_64 and ARM platform(s) **only**,  
-cross compile possible.
+### Using DKMS
+
+DKMS will make sure the driver is recompiled with each new kernel version
+that gets installed and is the least effort over all.
+
+To install use `dkms-install.sh`
+For removal `dksm-remove.sh`
+
+### Without DKMS
 
 For compiling type  
 `make`  
@@ -22,25 +29,3 @@ in source dir
 
 To install the firmware files  
 `sudo make install`
-
-
-To Unload driver you may need to disconnect the device  
-
-If the driver fails building consult your distro how to  
-install the kernel sources and build an <u>external</u> module.
-
-
-**NOTES**  
-This driver allows use of wpa_supplicant by using the nl80211 driver
-`wpa_supplicant -Dnl80211`
-
-If installing on Rasberry Pi or other "armv71" devices, edit the Makefile and set `CONFIG_PLATFORM_ARM_RPI = y` and `CONFIG_PLATFORM_I386_PC = n`
-
-**STATUS**  
-Driver works fine (some sort of)  
-Most of the work is done is cleaning the driver and make this mess **readable**   for conversion.
-Updates for wireless-ext/cfg80211  are not accepted.  
-
-  
-**BUGS**  
- 
